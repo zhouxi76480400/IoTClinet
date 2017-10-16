@@ -1,0 +1,38 @@
+<resources>
+
+    <style name="DefaultAppTheme" parent="@style/AppTheme"/>
+
+    <style name="DefaultTransparentTheme" parent="@style/TransparentTheme"/>
+
+    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:scrollbarThumbVertical">@color/colorPrimary</item>
+        <item name="android:scrollbarSize">@dimen/scroll_bar_size</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!--the text color of toolbar -->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!--toolbar shadow -->
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
+        <!-- subtitle color -->
+        <item name="subtitleTextColor">@color/colorSubTitle</item>
+    </style>
+
+    <style name="MenuOverlayTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!-- menu overlay item text color-->
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+</resources>

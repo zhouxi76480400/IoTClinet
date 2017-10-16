@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DefaultAppTheme" parent="@style/AppTheme">
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:colorControlHighlight">@color/colorRipple</item>
+    </style>
+
+    <style name="DefaultTransparentTheme" parent="@style/TransparentTheme">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

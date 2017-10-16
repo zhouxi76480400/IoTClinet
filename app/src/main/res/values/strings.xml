@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">IoT Client</string>
+    <string name="settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="find_servers">Find Servers</string>
+    <string name="hint">Hint</string>
+    <string name="no_any_network_hint">You have not any network , please open the WiFi.</string>
+    <string name="not_in_wifi_hint">You are not in WiFi network , please connect to a WiFi network.</string>
+    <string name="exit">Exit</string>
+    <string name="retry">Retry</string>
+    <string name="open_wifi_settings">Open WiFi Settings</string>
+    <string name="no_any_server_hint">Is no any server in this network now , please check the server is opened now.</string>
+    <string name="select_a_server">Select a server to continue</string>
+</resources>
