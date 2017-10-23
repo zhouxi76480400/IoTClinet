@@ -16,6 +16,13 @@
     <string name="back">Back</string>
     <string name="not_open_nfc">The NFC is not open , please open NFC and try again .</string>
     <string name="goto_settings">Goto Settings</string>
+    <string name="select_a_card_to_open_door">Select A Card To Open Door</string>
+    <string name="no_one_nfc_card_message">Cannot find any NFC card , please add card before open door.</string>
+    <string name="add_card">Add Card</string>
+    <string name="add_a_new_card">Add a new NFC card</string>
+    <string name="add_nfc_card_fragment1_desc">Add an NFC card is quick and easy , and it will not take a long time .</string>
+    <string name="next_continue">Continue</string>
     <string name="servicedesc">test</string>
     <string name="aiddescription">aaaa</string>
+
 </resources>

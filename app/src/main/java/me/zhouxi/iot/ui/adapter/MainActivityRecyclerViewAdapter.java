@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.List;
+import java.util.Objects;
 
 import me.zhouxi.iot.R;
+import me.zhouxi.iot.object.ItemDetailObject;
 
 /**
  * Created by zhouxi on 7/10/2017.
@@ -23,6 +26,20 @@ import me.zhouxi.iot.R;
 
 public class MainActivityRecyclerViewAdapter extends
         RecyclerView.Adapter<MainActivityRecyclerViewAdapter.MainActivityRecyclerViewAdapterViewHolder> {
+
+    public interface MainActivityRecyclerViewAdapterOnItemPressListener {
+
+        void onMainActivityRecyclerViewAdapterOnItemPressListener
+                (MainActivityRecyclerViewAdapter adapter, int position);
+
+    }
+
+    private MainActivityRecyclerViewAdapterOnItemPressListener listener;
+
+    public void setMainActivityRecyclerViewAdapterOnItemPressListener
+            (MainActivityRecyclerViewAdapterOnItemPressListener listener){
+        this.listener = listener;
+    }
 
     private RecyclerView recyclerView;
 
@@ -38,14 +55,24 @@ public class MainActivityRecyclerViewAdapter extends
     public MainActivityRecyclerViewAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View allView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_main_activity_recycler_view_adapter, parent, false);
-        return new MainActivityRecyclerViewAdapterViewHolder(allView);
+        return new MainActivityRecyclerViewAdapterViewHolder(allView,this);
     }
 
     @Override
     public void onBindViewHolder(MainActivityRecyclerViewAdapterViewHolder holder, int position) {
         setCardViewMargin(holder,position);
-
-
+        Object obj = dataSource.get(position);
+        String name = null;
+        String desc = null;
+        if(obj instanceof ItemDetailObject){
+            ItemDetailObject itemDetailObject = (ItemDetailObject) obj;
+            name = itemDetailObject.name;
+            desc = itemDetailObject.desc;
+        }
+        if(name != null)
+            holder.tv_name.setText(name);
+        if(desc != null)
+            holder.tv_desc.setText(desc);
     }
 
     @Override
@@ -59,14 +86,24 @@ public class MainActivityRecyclerViewAdapter extends
 
         public View press_view;
 
-        public MainActivityRecyclerViewAdapterViewHolder(View itemView) {
+        public TextView tv_name;
+
+        public TextView tv_desc;
+
+        public MainActivityRecyclerViewAdapterViewHolder(View itemView,
+                                                         final MainActivityRecyclerViewAdapter adapter) {
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
+            tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);
             press_view = itemView.findViewById(R.id.press_view);
             press_view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    if(listener != null) {
+                        int pos = getLayoutPosition();
+                        listener.onMainActivityRecyclerViewAdapterOnItemPressListener(adapter,pos);
+                    }
                 }
             });
         }
@@ -93,35 +130,4 @@ public class MainActivityRecyclerViewAdapter extends
         }
     }
 
-//    private int lastLayoutPosition = -1;
-//
-//    @Override
-//    public void onViewAttachedToWindow(MainActivityRecyclerViewAdapterViewHolder holder) {
-//        super.onViewAttachedToWindow(holder);
-//        int position = holder.getLayoutPosition();
-//        int height = holder.itemView.getLayoutParams().height;
-//
-//        int deltaY = (int) (height / 2.0f);
-//        if(position > lastLayoutPosition){
-//        } else if(position < lastLayoutPosition) {
-//            deltaY = 0 - deltaY;
-//        }else {
-//            return;
-//        }
-//
-//        lastLayoutPosition = position;
-//
-//        holder.itemView.setTranslationY(deltaY);
-//        holder.itemView.setAlpha(0.f);
-//        holder.itemView.animate()
-//                .translationY(0).alpha(1.f)
-//                .setInterpolator(new LinearInterpolator())
-//                .setDuration(300)
-//                .start();
-//    }
-//
-//    @Override
-//    public void onViewDetachedFromWindow(MainActivityRecyclerViewAdapterViewHolder holder) {
-//        super.onViewDetachedFromWindow(holder);
-//    }
 }

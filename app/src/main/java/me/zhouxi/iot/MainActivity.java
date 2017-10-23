@@ -29,13 +29,15 @@ import java.util.List;
 import me.zhouxi.iot.client.APIList;
 import me.zhouxi.iot.client.APIs;
 import me.zhouxi.iot.client.SocketClient;
+import me.zhouxi.iot.nfc.NFCCardSelectActivity;
 import me.zhouxi.iot.nfc.OpenDoorActivity;
 import me.zhouxi.iot.object.ItemDetailObject;
 import me.zhouxi.iot.ui.MyActivity;
 import me.zhouxi.iot.ui.adapter.MainActivityRecyclerViewAdapter;
 
 public class MainActivity extends MyActivity implements
-        Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+        Toolbar.OnMenuItemClickListener, SwipeRefreshLayout.OnRefreshListener ,
+        MainActivityRecyclerViewAdapter.MainActivityRecyclerViewAdapterOnItemPressListener {
 
     // used as recycler view
     private List<ItemDetailObject> itemDetailObjects;
@@ -61,6 +63,7 @@ public class MainActivity extends MyActivity implements
         recyclerView.setLayoutManager(layoutManager);
         itemDetailObjects = new ArrayList<>();
         adapter = new MainActivityRecyclerViewAdapter(recyclerView,itemDetailObjects);
+        adapter.setMainActivityRecyclerViewAdapterOnItemPressListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -166,5 +169,25 @@ public class MainActivity extends MyActivity implements
         startActivity(intent);
     }
 
+
+    @Override
+    public void onMainActivityRecyclerViewAdapterOnItemPressListener
+            (MainActivityRecyclerViewAdapter adapter, int position) {
+        ItemDetailObject itemDetailObject = itemDetailObjects.get(position);
+        Log.e("test",itemDetailObject.name);
+        switch (itemDetailObject.id){
+            case 0://
+                gotoNFCCardSelectActivity();
+                break;
+        }
+    }
+
+    /**
+     * select card to open door
+     */
+    private void gotoNFCCardSelectActivity(){
+        Intent intent = new Intent(this, NFCCardSelectActivity.class);
+        startActivity(intent);
+    }
 
 }

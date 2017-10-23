@@ -18,6 +18,12 @@
         <activity android:name=".ModeSwitchActivity"
             android:theme="@style/DefaultTransparentTheme">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
         <activity android:name=".MainActivity"/>
@@ -28,19 +34,21 @@
         <activity android:name=".FindServerActivity"
             android:label="@string/find_servers"/>
 
+        <activity android:name=".nfc.NFCCardSelectActivity"
+            android:label="@string/select_a_card_to_open_door">
+
+        </activity>
+
         <activity android:name=".nfc.OpenDoorActivity"
             android:label="@string/open_door_title">
         </activity>
 
+        <activity android:name=".nfc.AddNFCCardActivity"
+            />
+
         <activity android:name=".nfc.TestActivity"
             android:launchMode="singleTop"
             >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
