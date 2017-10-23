@@ -30,26 +30,33 @@
 
         <activity android:name=".nfc.OpenDoorActivity"
             android:label="@string/open_door_title">
+        </activity>
+
+        <activity android:name=".nfc.TestActivity"
+            android:launchMode="singleTop"
+            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
 
-        <service
-            android:name=".nfc.MyHostApduService"
-            android:exported="true"
-            android:permission="android.permission.BIND_NFC_SERVICE" >
-            <intent-filter>
-                <action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />
-            </intent-filter>
+        <!--<service-->
+            <!--android:name=".nfc.MyHostApduService"-->
+            <!--android:exported="true"-->
+            <!--android:permission="android.permission.BIND_NFC_SERVICE" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.nfc.cardemulation.action.HOST_APDU_SERVICE" />-->
+            <!--</intent-filter>-->
 
-            <meta-data
-                android:name="android.nfc.cardemulation.host_apdu_service"
-                android:resource="@xml/apduservice" />
-        </service>
+            <!--<meta-data-->
+                <!--android:name="android.nfc.cardemulation.host_apdu_service"-->
+                <!--android:resource="@xml/apduservice" />-->
+        <!--</service>-->
 
     </application>
 
