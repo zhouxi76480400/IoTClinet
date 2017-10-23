@@ -11,4 +11,11 @@
     <string name="open_wifi_settings">Open WiFi Settings</string>
     <string name="no_any_server_hint">Is no any server in this network now , please check the server is opened now.</string>
     <string name="select_a_server">Select a server to continue</string>
+    <string name="open_door_title">Open Door</string>
+    <string name="device_not_nfc">This device is not having NFC module .</string>
+    <string name="back">Back</string>
+    <string name="not_open_nfc">The NFC is not open , please open NFC and try again .</string>
+    <string name="goto_settings">Goto Settings</string>
+    <string name="servicedesc">test</string>
+    <string name="aiddescription">aaaa</string>
 </resources>

@@ -29,6 +29,7 @@ import java.util.List;
 import me.zhouxi.iot.client.APIList;
 import me.zhouxi.iot.client.APIs;
 import me.zhouxi.iot.client.SocketClient;
+import me.zhouxi.iot.nfc.OpenDoorActivity;
 import me.zhouxi.iot.object.ItemDetailObject;
 import me.zhouxi.iot.ui.MyActivity;
 import me.zhouxi.iot.ui.adapter.MainActivityRecyclerViewAdapter;
@@ -65,7 +66,6 @@ public class MainActivity extends MyActivity implements
 
         swipeRefreshLayout.setRefreshing(true);
         getAllDevice();
-
     }
 
     @Override
@@ -160,6 +160,11 @@ public class MainActivity extends MyActivity implements
         startActivity(intent);
     }
 
+
+    private void test(){
+        Intent intent = new Intent(this, OpenDoorActivity.class);
+        startActivity(intent);
+    }
 
 
 }
