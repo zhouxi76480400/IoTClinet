@@ -43,6 +43,12 @@ public class AddNFCCardActivity extends MyActivity implements
         fragment1.setAddNFCCardFragment1Listener(this);
         fragment2 = new AddNFCCardFragment2();
         gotoView1(false);
+        frameLayout.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                checkServerIsHavePassword();
+            }
+        },100);
     }
 
     private void transparentStatusBar(){
@@ -81,5 +87,10 @@ public class AddNFCCardActivity extends MyActivity implements
         }else {
             super.onBackPressed();
         }
+    }
+
+    private void checkServerIsHavePassword(){
+        fragment1.progressBar.setVisibility(View.VISIBLE);
+        fragment1.enableButton(false);
     }
 }

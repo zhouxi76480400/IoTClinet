@@ -1,8 +1,10 @@
 package me.zhouxi.iot.nfc.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import me.zhouxi.iot.R;
 
@@ -35,6 +38,18 @@ public class AddNFCCardFragment1 extends Fragment implements View.OnClickListene
 
     private Button btn_next;
 
+    public void enableButton(boolean isEnable){
+        if(isEnable){
+            btn_next.setTextColor(ContextCompat.getColor(getContext(),R.color.colorPrimaryDark));
+            btn_next.setEnabled(true);
+        }else{
+            btn_next.setTextColor(Color.parseColor("#d6d8d7"));
+            btn_next.setEnabled(false);
+        }
+    }
+
+    public ProgressBar progressBar;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +64,8 @@ public class AddNFCCardFragment1 extends Fragment implements View.OnClickListene
         ll_top.getLayoutParams().height = all_height * 45 / 100;
         btn_next = (Button) view.findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         return view;
     }
 
