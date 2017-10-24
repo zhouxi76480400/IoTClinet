@@ -318,7 +318,6 @@ public class AddNFCCardActivity extends MyActivity implements
 
     @Override
     public void onAddNFCCardFragment3AuthFailed(boolean networkException) {
-        Log.e("test","aaaabbbbcccc");
         backtoView2();
         frameLayout.postDelayed(new Runnable() {
             @Override

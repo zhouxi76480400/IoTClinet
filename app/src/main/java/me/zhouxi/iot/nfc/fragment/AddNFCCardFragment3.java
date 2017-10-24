@@ -102,7 +102,6 @@ public class AddNFCCardFragment3 extends Fragment implements SetPasswordThread.S
 
     @Override
     public void onSetPasswordSuccess() {
-        Log.e("test","onSetPasswordSuccess");
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -120,7 +119,7 @@ public class AddNFCCardFragment3 extends Fragment implements SetPasswordThread.S
 
     @Override
     public void onPasswordAuthenticationSuccess() {
-        Log.e("test","aaaa");
+        onSetPasswordSuccess();
     }
 
     @Override
