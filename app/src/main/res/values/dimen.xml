@@ -10,8 +10,8 @@
     <dimen name="text_devices_sub_title_font_size">16sp</dimen>
     <dimen name="devices_recycler_view_item_min_height">80dp</dimen>
     <dimen name="add_nfc_card_fragment1_title_font_size">32sp</dimen>
-    <dimen name="add_nfc_card_fragment1_title_left_right_margin">32dp</dimen>
-    <dimen name="add_nfc_card_fragment1_title_top_bottom_margin">16dp</dimen>
+    <dimen name="add_nfc_card_fragment1_title_left_right_margin">20dp</dimen>
+    <dimen name="add_nfc_card_fragment1_title_top_bottom_margin">10dp</dimen>
     <dimen name="add_nfc_card_fragment1_desc_font_size">18sp</dimen>
 
 

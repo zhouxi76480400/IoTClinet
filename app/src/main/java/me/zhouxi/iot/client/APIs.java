@@ -6,5 +6,7 @@ package me.zhouxi.iot.client;
 
 public enum APIs {
     GetAllDevicesList, // all devices
-    IsServerHavePassword //
+    IsServerHavePassword, // check password exist
+    SetServersPassword, // set password
+    PasswordAuthentication
 }

@@ -19,9 +19,26 @@
     <string name="select_a_card_to_open_door">Select A Card To Open Door</string>
     <string name="no_one_nfc_card_message">Cannot find any NFC card , please add card before open door.</string>
     <string name="add_card">Add Card</string>
-    <string name="add_a_new_card">Add a new NFC card</string>
+    <string name="add_a_new_card">Add A New NFC Card</string>
     <string name="add_nfc_card_fragment1_desc">Add an NFC card is quick and easy , and it will not take a long time .</string>
     <string name="next_continue">Continue</string>
+    <string name="want_exit_add_new_card">Cancel Add an NFC card ?</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="cannot_connect_to_server">Cannot connect to server</string>
+    <string name="set_your_password">Set Server\'s Password</string>
+    <string name="press_your_password">Press Server\'s Password</string>
+    <string name="press_password_to_add_nfc_card">Your server looks like have password , please press password before adding card .</string>
+    <string name="press_password_please">Input password (pwd &gt;= 6 and &lt;= 20)</string>
+    <string name="finish">FINISH</string>
+    <string name="auth">Authentication</string>
+    <string name="auth_desc">Is Authentic your password now , It will not take a long time .</string>
+    <string name="set_your_password_now">Set Server\'s Password now , It will not take a long time .</string>
+    <string name="set_password_fail">Set server\'s password failed .</string>
+    <string name="get_nfc_card_now">Get NFC Card Now</string>
+    <string name="get_nfc_card_now_desc">Get NFC card now , It will not take a long time .</string>
+    <string name="auth_failed">Authentication failed .</string>
+
     <string name="servicedesc">test</string>
     <string name="aiddescription">aaaa</string>
 

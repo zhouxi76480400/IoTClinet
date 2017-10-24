@@ -116,14 +116,6 @@ public class APIList {
         }
     }
 
-    /**
-     * get all devices
-     * @param listener
-     */
-    public void getAllDevices(APIListListener listener){
-        commonShortRequest(listener,APIs.GetAllDevicesList,null);
-    }
-
     private void commonShortRequest(APIListListener listener,APIs type,String param){
         Set<String> keySet = apiDictionary.keySet();
         Iterator<String> iterator = keySet.iterator();
@@ -147,6 +139,41 @@ public class APIList {
         if(param == null)
             param = "";
         return String.format("%s:%s\0",api,param);
+    }
+
+
+    /**
+     * get all devices
+     * @param listener
+     */
+    public void getAllDevices(APIListListener listener){
+        commonShortRequest(listener,APIs.GetAllDevicesList,null);
+    }
+
+    /**
+     * check server is have password
+     * @param listListener
+     */
+    public void IsServerHavePassword(APIListListener listListener){
+        commonShortRequest(listListener,APIs.IsServerHavePassword,null);
+    }
+
+    /**
+     * set pwd
+     * @param listListener
+     * @param params
+     */
+    public void SetServersPassword(APIListListener listListener,String params){
+        commonShortRequest(listListener,APIs.SetServersPassword,params);
+    }
+
+    /**
+     * check pwd
+     * @param listListener
+     * @param params
+     */
+    public void PasswordAuthentication(APIListListener listListener,String params){
+        commonShortRequest(listListener,APIs.PasswordAuthentication,params);
     }
 
 }
