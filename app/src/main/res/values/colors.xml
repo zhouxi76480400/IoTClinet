@@ -6,4 +6,5 @@
     <color name="colorAccent">@color/colorPrimaryDark</color>
     <color name="colorRipple">#ffdbe7</color>
     <color name="colorSubTitle">#ffeef4</color>
+    <color name="colorNFCCard">#ffefe7</color>
 </resources>

@@ -13,6 +13,8 @@
     <dimen name="add_nfc_card_fragment1_title_left_right_margin">20dp</dimen>
     <dimen name="add_nfc_card_fragment1_title_top_bottom_margin">10dp</dimen>
     <dimen name="add_nfc_card_fragment1_desc_font_size">18sp</dimen>
+    <dimen name="nfc_card_font_size">30sp</dimen>
+    <dimen name="nfc_card_card_number_font_size">24sp</dimen>
 
 
 </resources>

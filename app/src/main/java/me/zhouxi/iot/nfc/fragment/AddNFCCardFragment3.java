@@ -10,24 +10,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import me.zhouxi.iot.IoTApplication;
 import me.zhouxi.iot.R;
+import me.zhouxi.iot.client.nfc.GetNFCCardThread;
 import me.zhouxi.iot.client.nfc.PasswordAuthenticationThread;
 import me.zhouxi.iot.client.nfc.SetPasswordThread;
+import me.zhouxi.iot.client.nfc.sql.NFCKeyDBAPI;
 
 /**
  * Created by zhouxi on 24/10/2017.
  */
 
 public class AddNFCCardFragment3 extends Fragment implements SetPasswordThread.SetPasswordThreadListener,
-        PasswordAuthenticationThread.PasswordAuthenticationThreadListener{
+        PasswordAuthenticationThread.PasswordAuthenticationThreadListener , GetNFCCardThread.GetNFCCardThreadListener{
 
     public interface AddNFCCardFragment3Listener{
 
         void onAddNFCCardFragment3SetPasswordFailed(boolean networkException);
 
         void onAddNFCCardFragment3AuthFailed(boolean networkException);
+
+        void finishToAddCard();
 
     }
 
@@ -51,9 +60,17 @@ public class AddNFCCardFragment3 extends Fragment implements SetPasswordThread.S
 
     private Button btn_finish;
 
+    private ProgressBar progressBar;
+
 
     private String pwdTmp;
     private boolean isHavePassword;
+
+    private boolean isSuccessful;
+
+    public boolean isSuccessful(){
+        return isSuccessful;
+    }
 
     @Nullable
     @Override
@@ -65,8 +82,15 @@ public class AddNFCCardFragment3 extends Fragment implements SetPasswordThread.S
         tv_title = (TextView) view.findViewById(R.id.tv_title);
         btn_finish = (Button) view.findViewById(R.id.btn_finish);
         btn_finish.setVisibility(View.GONE);
+        btn_finish.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(listener != null)
+                    listener.finishToAddCard();
+            }
+        });
         tv_desc = (TextView) view.findViewById(R.id.tv_desc);
-
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         return view;
     }
 
@@ -137,5 +161,52 @@ public class AddNFCCardFragment3 extends Fragment implements SetPasswordThread.S
     private void getNFCCard(){
         tv_title.setText(getString(R.string.get_nfc_card_now));
         tv_desc.setText(getString(R.string.get_nfc_card_now_desc));
+        GetNFCCardThread getNFCCardThread = new GetNFCCardThread(this);
+        getNFCCardThread.start(pwdTmp, System.currentTimeMillis());
     }
+
+
+    @Override
+    public void onGetNFCCardThreadSuccess(String string) {
+        if(string.equalsIgnoreCase("false")){
+            onGetNFCCardThreadFailed(false);
+        }else{
+            try {
+                JSONObject jsonObject = new JSONObject(string);
+                String time = String.valueOf(jsonObject.getLong("time"));
+                String key = jsonObject.getString("key");
+                NFCKeyDBAPI nfcKeyDBAPI = NFCKeyDBAPI.getInstance();
+                nfcKeyDBAPI.insertAData(time,key);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        successToGetKey();
+                    }
+                });
+            } catch (JSONException e) {
+                onGetNFCCardThreadFailed(false);
+            }
+        }
+    }
+
+    @Override
+    public void onGetNFCCardThreadFailed(boolean networkException) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(listener != null)
+                    listener.onAddNFCCardFragment3AuthFailed(false);
+            }
+        });
+    }
+
+    private void successToGetKey(){
+        tv_title.setText(getString(R.string.get_nfc_card_ok));
+        tv_desc.setText(getString(R.string.get_nfc_card_ok_desc));
+        btn_finish.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        isStartRequest = false;
+        isSuccessful = true;
+    }
+
 }

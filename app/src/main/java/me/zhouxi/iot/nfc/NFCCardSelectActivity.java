@@ -5,30 +5,44 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.zhouxi.iot.R;
-import me.zhouxi.iot.nfc.object.NFCCardDataObject;
+import me.zhouxi.iot.client.nfc.object.NFCKeyObject;
+import me.zhouxi.iot.nfc.adapter.NFCCardAdapter;
 import me.zhouxi.iot.ui.MyActivity;
 
 /**
  * Created by zhouxi on 23/10/2017.
  */
 
-public class NFCCardSelectActivity extends MyActivity {
+public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuItemClickListener{
 
     private Toolbar toolbar;
 
     private AlertDialog noCardAlertDialog;
+
+    private List<NFCKeyObject> nfcKeyObjects;
+
+    private NFCCardAdapter nfcCardAdapter;
+
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_card_select);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setOnMenuItemClickListener(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -37,23 +51,43 @@ public class NFCCardSelectActivity extends MyActivity {
                 closeActivity();
             }
         });
-
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        nfcKeyObjects = new ArrayList<>();
+        nfcCardAdapter = new NFCCardAdapter(nfcKeyObjects);
+        nfcCardAdapter.setShowModify(false);
+        recyclerView.setAdapter(nfcCardAdapter);
 
 
 
         readCardsFromData();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_nfc_card_select,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+
+        return false;
+    }
+
+
     /**
      * read signed card
      */
     private void readCardsFromData(){
-        List<NFCCardDataObject> card = NFCCardUtil.getNFCDataObject();
+        List<NFCKeyObject> card = NFCCardUtil.getNFCDataObject();
         if(card.size() == 0){
             noCardAlert();
             return;
         }
-
+        nfcKeyObjects.clear();
+        nfcKeyObjects.addAll(card);
+        nfcCardAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -103,12 +137,15 @@ public class NFCCardSelectActivity extends MyActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == AddNFCCardActivity.CONTEXT_INCLUDE_CODE){
-
+        if(requestCode == AddNFCCardActivity.CONTEXT_INCLUDE_CODE && resultCode == RESULT_OK){
+            if(noCardAlertDialog != null && noCardAlertDialog.isShowing())
+                noCardAlertDialog.dismiss();
+            readCardsFromData();
         }
     }
 
     private void closeActivity(){
         finish();
     }
+
 }

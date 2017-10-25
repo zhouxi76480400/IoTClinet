@@ -52,8 +52,8 @@ public class IoTApplication extends Application {
     }
 
     private void init(){
-        UDPSocketReceiver.getInstance();
         setServerAddress();
+        UDPSocketReceiver.getInstance();
     }
 
     private void setServerAddress(){

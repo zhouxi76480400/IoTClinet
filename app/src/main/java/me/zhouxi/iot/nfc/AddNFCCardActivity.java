@@ -116,15 +116,19 @@ public class AddNFCCardActivity extends MyActivity implements
 
     @Override
     public void onBackPressed() {
-        if(fragment2.isVisible()){
-            gotoView1(true);
-        }else if(fragment1.isVisible()){
-            showExitAlert();
-        }else if(fragment3.isVisible()){
-            if(!fragment3.isStartRequest())
-                backtoView2();
-            else
+        if(fragment3.isSuccessful()){
+            finishToAddCard();
+        }else{
+            if(fragment2.isVisible()){
+                gotoView1(true);
+            }else if(fragment1.isVisible()){
                 showExitAlert();
+            }else if(fragment3.isVisible()){
+                if(!fragment3.isStartRequest())
+                    backtoView2();
+                else
+                    showExitAlert();
+            }
         }
     }
 
@@ -326,5 +330,11 @@ public class AddNFCCardActivity extends MyActivity implements
                 showRetryAlertDialog(true);
             }
         },300);
+    }
+
+    @Override
+    public void finishToAddCard(){
+        setResult(RESULT_OK);
+        finish();
     }
 }

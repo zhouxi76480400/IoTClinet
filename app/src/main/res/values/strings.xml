@@ -38,6 +38,9 @@
     <string name="get_nfc_card_now">Get NFC Card Now</string>
     <string name="get_nfc_card_now_desc">Get NFC card now , It will not take a long time .</string>
     <string name="auth_failed">Authentication failed .</string>
+    <string name="get_nfc_card_ok">Card Add Successful</string>
+    <string name="get_nfc_card_ok_desc">Press \"FINISH\" to finish .</string>
+    <string name="nfc_access_card">NFC Access Card</string>
 
     <string name="servicedesc">test</string>
     <string name="aiddescription">aaaa</string>

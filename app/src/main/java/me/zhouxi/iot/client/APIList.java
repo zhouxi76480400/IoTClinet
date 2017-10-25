@@ -1,6 +1,9 @@
 package me.zhouxi.iot.client;
 
+import android.util.Log;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -174,6 +177,17 @@ public class APIList {
      */
     public void PasswordAuthentication(APIListListener listListener,String params){
         commonShortRequest(listListener,APIs.PasswordAuthentication,params);
+    }
+
+    /**
+     * get a new nfc card
+     * @param listListener
+     * @param pwd
+     * @param time
+     */
+    public void GetNFCCard(APIListListener listListener,String pwd ,long time){
+        String req = pwd + "," + String.valueOf(time / 1000);
+        commonShortRequest(listListener,APIs.GetNFCCard,req);
     }
 
 }
