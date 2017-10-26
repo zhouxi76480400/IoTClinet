@@ -1,6 +1,7 @@
 package me.zhouxi.iot.nfc.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import me.zhouxi.iot.R;
 import me.zhouxi.iot.client.nfc.object.NFCKeyObject;
+import me.zhouxi.iot.nfc.TestActivity;
 
 /**
  * Created by zhouxi on 25/10/2017.
@@ -71,12 +73,22 @@ public class NFCCardAdapter extends RecyclerView.Adapter<NFCCardAdapter.NFCCardA
 
         public TextView tv_card_number;
 
-        public NFCCardAdapterViewHolder(View itemView) {
+        public View view;
+
+        public NFCCardAdapterViewHolder(final View itemView) {
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
             resizeCardView(cardView);
             tv_card_number = (TextView) itemView.findViewById(R.id.tv_card_number);
             setTextBottomMargin(tv_card_number);
+            view = itemView.findViewById(R.id.view);
+            view.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), TestActivity.class);
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
 
         private void resizeCardView(CardView cardView){

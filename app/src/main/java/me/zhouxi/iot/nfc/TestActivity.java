@@ -9,6 +9,7 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import me.zhouxi.iot.ui.MyActivity;
@@ -42,10 +43,13 @@ public class TestActivity extends BaseNFCActivity{
         if (tag == null) {
             return;
         }
+        Log.e("test",tag.toString());
+
         NdefMessage ndefMessage = new NdefMessage(new NdefRecord[]{NdefRecord
                 .createApplicationRecord(mPackageName)});
         //转换成字节获得大小
         int size = ndefMessage.toByteArray().length;
+        Log.e("tst", String.valueOf(ndefMessage.toByteArray()));
         try {
             //2.判断NFC标签的数据类型（通过Ndef.get方法）
             Ndef ndef = Ndef.get(tag);
