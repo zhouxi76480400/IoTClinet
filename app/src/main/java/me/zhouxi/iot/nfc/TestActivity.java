@@ -24,6 +24,8 @@ public class TestActivity extends BaseNFCActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+
     }
 
     @Override
@@ -31,8 +33,8 @@ public class TestActivity extends BaseNFCActivity{
         if (mPackageName == null)
             return;
         //1.获取Tag对象
-        Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        writeNFCTag(detectedTag);
+//        Tag detectedTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+//        writeNFCTag(detectedTag);
     }
     /**
      * 往标签写数据的方法

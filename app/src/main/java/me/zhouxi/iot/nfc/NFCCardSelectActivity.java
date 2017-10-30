@@ -25,7 +25,8 @@ import me.zhouxi.iot.ui.MyActivity;
  * Created by zhouxi on 23/10/2017.
  */
 
-public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuItemClickListener{
+public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuItemClickListener,
+        NFCCardAdapter.NFCCardAdapterListener{
 
     private Toolbar toolbar;
 
@@ -56,7 +57,9 @@ public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuI
         nfcKeyObjects = new ArrayList<>();
         nfcCardAdapter = new NFCCardAdapter(nfcKeyObjects);
         nfcCardAdapter.setShowModify(false);
+        nfcCardAdapter.setNFCCardAdapterListener(this);
         recyclerView.setAdapter(nfcCardAdapter);
+
 
 
 
@@ -148,4 +151,12 @@ public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuI
         finish();
     }
 
+    @Override
+    public void onNFCCardAdapterPress(int position) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("key",nfcKeyObjects.get(position));
+        Intent intent = new Intent(this,OpenDoorActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 }

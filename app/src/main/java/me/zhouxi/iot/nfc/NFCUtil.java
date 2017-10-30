@@ -52,4 +52,11 @@ public class NFCUtil {
         application.startActivity(intent);
     }
 
+    public static String getMyNFCTag(NfcAdapter nfcAdapter){
+
+
+
+        return "";
+    }
+
 }

@@ -1,11 +1,9 @@
 package me.zhouxi.iot.nfc.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +12,29 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 import me.zhouxi.iot.R;
 import me.zhouxi.iot.client.nfc.object.NFCKeyObject;
-import me.zhouxi.iot.nfc.TestActivity;
 
 /**
  * Created by zhouxi on 25/10/2017.
  */
 
 public class NFCCardAdapter extends RecyclerView.Adapter<NFCCardAdapter.NFCCardAdapterViewHolder> {
+
+    public interface NFCCardAdapterListener {
+
+        void onNFCCardAdapterPress(int position);
+
+    }
+
+    private NFCCardAdapterListener listener;
+
+    public void setNFCCardAdapterListener(NFCCardAdapterListener listener){
+        this.listener = listener;
+    }
 
     private List<NFCKeyObject> dataSource;
 
@@ -85,8 +93,9 @@ public class NFCCardAdapter extends RecyclerView.Adapter<NFCCardAdapter.NFCCardA
             view.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(view.getContext(), TestActivity.class);
-                    view.getContext().startActivity(intent);
+                    if (listener != null){
+                        listener.onNFCCardAdapterPress(getLayoutPosition());
+                    }
                 }
             });
         }
