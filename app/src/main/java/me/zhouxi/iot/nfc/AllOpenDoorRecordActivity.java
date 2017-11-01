@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import me.zhouxi.iot.R;
@@ -100,6 +101,7 @@ public class AllOpenDoorRecordActivity extends MyActivity implements
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Collections.reverse(openDoorRecordObjectList);
         openDoorRecordObjects.clear();
         openDoorRecordObjects.addAll(openDoorRecordObjectList);
         runOnUiThread(new Runnable() {

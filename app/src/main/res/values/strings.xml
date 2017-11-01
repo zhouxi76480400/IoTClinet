@@ -46,8 +46,13 @@
     <string name="online">Online</string>
     <string name="offline">Offline</string>
     <string name="all_records">All Records</string>
+    <string name="time">Time</string>
+    <string name="card">Card</string>
+    <string name="device">Device</string>
 
     <string name="servicedesc">test</string>
     <string name="aiddescription">aaaa</string>
+
+    <string name="sdf">yyyy\tMM/dd\tHH:mm</string>
 
 </resources>
