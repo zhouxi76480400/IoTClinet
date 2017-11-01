@@ -66,12 +66,10 @@ public class SocketThread implements Runnable{
                 finalString = finalString.substring(0,finalString.length() - 1);
             }
 
-            Log.d(DEBUG_TAG,api +" :"+finalString);
-
             if(listener != null) {
                 listener.apiListListenerOnDataReceived(apiEnum,finalString);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             if (listener != null) {
                 listener.apiListListenerOnError(apiEnum, e);

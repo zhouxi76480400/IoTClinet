@@ -44,7 +44,7 @@ public class APIList {
     /**
      * time out
      */
-    public static int timeout = 10000;
+    public static int timeout = 3000;
 
     /**
      * receive data from server

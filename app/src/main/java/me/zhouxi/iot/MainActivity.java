@@ -47,11 +47,13 @@ public class MainActivity extends MyActivity implements
     private RecyclerView recyclerView;
     private MainActivityRecyclerViewAdapter adapter;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(this);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
@@ -145,14 +147,40 @@ public class MainActivity extends MyActivity implements
                 swipeRefreshLayout.setRefreshing(false);
                 swipeRefreshLayout.setEnabled(true);
                 adapter.notifyDataSetChanged();
+                setIsOnline(true);
             }
         });
     }
 
     @Override
-    public void apiListListenerOnErrorMainThread(APIs type, Exception e) {
-        swipeRefreshLayout.setRefreshing(false);
-        swipeRefreshLayout.setEnabled(true);
+    public void apiListListenerOnError(APIs type, Exception e) {
+        super.apiListListenerOnError(type, e);
+        final List<ItemDetailObject> itemDetailObjects = IoTApplication.getInstance().getSavedIndexData();
+        Log.e("zhouxi",itemDetailObjects.toString());
+        if(itemDetailObjects.size() > 0){
+            IoTApplication.getInstance().cleanAndResetItemDetailObjectList(itemDetailObjects);;
+        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                swipeRefreshLayout.setEnabled(true);
+                setIsOnline(false);
+                if(itemDetailObjects.size() > 0){
+                    refreshMainActivity();
+                }
+            }
+        });
+    }
+
+    private void setIsOnline(boolean isOnline){
+        String online_str = null;
+        if(isOnline){
+            online_str = getString(R.string.online);
+        }else{
+            online_str = getString(R.string.offline);
+        }
+        toolbar.setSubtitle(String.format(getString(R.string.status),online_str));
     }
 
     /**
@@ -162,13 +190,6 @@ public class MainActivity extends MyActivity implements
         Intent intent = new Intent(this,SettingActivity.class);
         startActivity(intent);
     }
-
-
-    private void test(){
-        Intent intent = new Intent(this, OpenDoorActivity.class);
-        startActivity(intent);
-    }
-
 
     @Override
     public void onMainActivityRecyclerViewAdapterOnItemPressListener

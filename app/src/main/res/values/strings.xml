@@ -42,6 +42,9 @@
     <string name="get_nfc_card_ok_desc">Press \"FINISH\" to finish .</string>
     <string name="nfc_access_card">NFC Access Card</string>
     <string name="success_to_open_door">Successful</string>
+    <string name="status">Status:%s</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
 
     <string name="servicedesc">test</string>
     <string name="aiddescription">aaaa</string>

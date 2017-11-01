@@ -25,8 +25,7 @@ import me.zhouxi.iot.ui.MyActivity;
  * Created by zhouxi on 23/10/2017.
  */
 
-public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuItemClickListener,
-        NFCCardAdapter.NFCCardAdapterListener{
+public class NFCCardSelectActivity extends MyActivity implements NFCCardAdapter.NFCCardAdapterListener{
 
     private Toolbar toolbar;
 
@@ -43,7 +42,6 @@ public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc_card_select);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setOnMenuItemClickListener(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -73,11 +71,14 @@ public class NFCCardSelectActivity extends MyActivity implements Toolbar.OnMenuI
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-
-        return false;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_add_card:
+                gotoAddCardActivity();
+                break;
+        }
+        return true;
     }
-
 
     /**
      * read signed card

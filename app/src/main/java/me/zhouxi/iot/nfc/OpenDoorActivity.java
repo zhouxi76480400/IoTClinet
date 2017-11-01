@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -45,17 +46,25 @@ public class OpenDoorActivity extends MyActivity implements NfcAdapter.OnNdefPus
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_door);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         if(getIntent().getExtras() != null){
             Serializable serializable = getIntent().getExtras().getSerializable("key");
             if(serializable != null && serializable instanceof NFCKeyObject){
                 nfcKeyObject = (NFCKeyObject) serializable;
+                toolbar.setTitle(getString(R.string.open_door_title)+":"+nfcKeyObject.create_time);
             }else {
                 finish();
             }
         }else{
             finish();
         }
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
