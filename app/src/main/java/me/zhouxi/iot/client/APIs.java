@@ -8,6 +8,7 @@ public enum APIs {
     GetAllDevicesList, // all devices
     IsServerHavePassword, // check password exist
     SetServersPassword, // set password
-    GetNFCCard, // get a new card
-    PasswordAuthentication // check password
+    GetNFCCard, // get a new card/
+    PasswordAuthentication, // check password
+    GetAllNFCAuthOKData
 }

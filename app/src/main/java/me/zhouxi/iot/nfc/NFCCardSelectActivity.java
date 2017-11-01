@@ -76,6 +76,9 @@ public class NFCCardSelectActivity extends MyActivity implements NFCCardAdapter.
             case R.id.menu_add_card:
                 gotoAddCardActivity();
                 break;
+            case R.id.all_records:
+                openAllRecordsActivity();
+                break;
         }
         return true;
     }
@@ -158,6 +161,11 @@ public class NFCCardSelectActivity extends MyActivity implements NFCCardAdapter.
         bundle.putSerializable("key",nfcKeyObjects.get(position));
         Intent intent = new Intent(this,OpenDoorActivity.class);
         intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    private void openAllRecordsActivity(){
+        Intent intent = new Intent(this,AllOpenDoorRecordActivity.class);
         startActivity(intent);
     }
 }

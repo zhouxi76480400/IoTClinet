@@ -190,4 +190,12 @@ public class APIList {
         commonShortRequest(listListener,APIs.GetNFCCard,req);
     }
 
+    /**
+     * get all open door data
+     * @param listListener
+     */
+    public void GetAllNFCAuthOKData(APIListListener listListener){
+        commonShortRequest(listListener,APIs.GetAllNFCAuthOKData,null);
+    }
+
 }

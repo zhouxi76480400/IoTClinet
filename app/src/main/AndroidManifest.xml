@@ -49,8 +49,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".nfc.AddNFCCardActivity"
-            />
+        <activity android:name=".nfc.AddNFCCardActivity" />
+
+        <activity android:name=".nfc.AllOpenDoorRecordActivity"
+            android:label="@string/all_records" />
 
     </application>
 
