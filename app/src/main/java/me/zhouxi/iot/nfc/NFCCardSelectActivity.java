@@ -57,10 +57,6 @@ public class NFCCardSelectActivity extends MyActivity implements NFCCardAdapter.
         nfcCardAdapter.setShowModify(false);
         nfcCardAdapter.setNFCCardAdapterListener(this);
         recyclerView.setAdapter(nfcCardAdapter);
-
-
-
-
         readCardsFromData();
     }
 

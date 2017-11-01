@@ -82,8 +82,8 @@ public class MainActivity extends MyActivity implements
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.main_activity_setting:
-                gotoSettingsActivity();
+            case R.id.main_activity_exit:
+                System.exit(0);
                 break;
         }
         return true;
@@ -156,7 +156,6 @@ public class MainActivity extends MyActivity implements
     public void apiListListenerOnError(APIs type, Exception e) {
         super.apiListListenerOnError(type, e);
         final List<ItemDetailObject> itemDetailObjects = IoTApplication.getInstance().getSavedIndexData();
-        Log.e("zhouxi",itemDetailObjects.toString());
         if(itemDetailObjects.size() > 0){
             IoTApplication.getInstance().cleanAndResetItemDetailObjectList(itemDetailObjects);;
         }
